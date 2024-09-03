@@ -56,6 +56,21 @@ public class StandAloneTest {
 		
 		driver.findElement(By.cssSelector(".totalRow button")).click();
 		
+		// Complete the checkout
+		driver.findElement(By.cssSelector("input[placeholder='Select Country']")).sendKeys("Ind");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+		
+		driver.findElement(By.xpath("//section[contains(@class,'ta-results')]//button[3]")).click();
+		
+		driver.findElement(By.cssSelector(".action__submit")).click();
+		
+		String thankYouMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
+		
+		Assert.assertTrue(thankYouMessage.equalsIgnoreCase("Thankyou for the order."));
+		
+		driver.close();
+		
+		
 		 
 	}
 
